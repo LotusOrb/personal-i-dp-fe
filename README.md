@@ -44,7 +44,17 @@ git clone https://github.com/LotusOrb/personal-i-dp-fe.git
 ```bash
 npm run install
 ```
-3. Developing .
+3. Copy environtment.
+
+```bash
+cp ./env.example ./.env
+```
+4. (a) Developing with api forwarder
+
+```bash
+npm run dev:vercel
+```
+4. (b) Developing without api forwarder
 
 ```bash
 npm run dev
