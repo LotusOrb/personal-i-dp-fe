@@ -36,6 +36,7 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+
     @each $k, $v in $layout-breakpoint {
       @media screen and (min-width: $v) {
         @if $k == "mobile" {
@@ -50,6 +51,10 @@
     padding: 0.5rem;
     margin-left: 0.5rem;
     cursor: pointer;
+    color: map-get($color, "black");
+    &--active{
+      color: map-get($color, "primary");
+    }
     &:hover {
       color: map-get($color, "primary");
     }
