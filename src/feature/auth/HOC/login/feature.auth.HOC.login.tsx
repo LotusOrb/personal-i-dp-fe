@@ -29,7 +29,7 @@ export const FeatureAuthHOCLogin = () => {
       }}
     >
       <div>
-        <Card title="Signin" style={{ maxWidth: "100%", width: "512px" }}>
+        <Card title="Signin" style={{ maxWidth: "100%"}}>
           <Row gutter={[16, 16]}>
             <Col xs={24}>
               <Button
@@ -45,7 +45,7 @@ export const FeatureAuthHOCLogin = () => {
               </Button>
             </Col>
             <Col xs={24}>
-              <Button block>Back</Button>
+              <Button block onClick={()=>navigate(-1)}>Back</Button>
             </Col>
           </Row>
         </Card>
