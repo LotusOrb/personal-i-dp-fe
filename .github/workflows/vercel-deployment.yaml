@@ -6,14 +6,13 @@ env:
   VITE_APP_TITLE: ${{vars.VITE_APP_TITLE}}
   VITE_APP_AUTH_STORAGE: ${{vars.VITE_APP_AUTH_STORAGE}}
   VITE_APP_MICROSERVICE_DEFAULT: ${{vars.VITE_APP_MICROSERVICE_DEFAULT}}
-# on:
-#   pull_request:
-#     types:
-#       - closed
-on: push
+on:
+  pull_request:
+    types:
+      - closed
 jobs:
   Deploy-Production:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     strategy:
       matrix:
