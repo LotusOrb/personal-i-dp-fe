@@ -2,14 +2,16 @@ import React from "react";
 import { Button, Typography } from "antd";
 
 import { CoreProviderTheme } from "@core/provider/theme";
-import { coreConfig } from "config/core.config";
-
+import { config } from "@config/config";
+import { CoreProviderStore } from "@core/provider/store";
 
 export const CoreMount = () => {
   return (
-    <CoreProviderTheme>
-      <Typography.Title>{coreConfig.TITLE}</Typography.Title>
-      <Button>Click me</Button>
-    </CoreProviderTheme>
+    <CoreProviderStore>
+      <CoreProviderTheme>
+        <Typography.Title>{config.TITLE}</Typography.Title>
+        <Button type='primary'>Click me</Button>
+      </CoreProviderTheme>
+    </CoreProviderStore>
   );
 };

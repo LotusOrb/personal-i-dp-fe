@@ -22,7 +22,8 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@core/*": ["core/*"]
+      "@core/*": ["core/*"],
+      "@config/*": ["config/*"]
     }
   },
   "include": ["src"],
