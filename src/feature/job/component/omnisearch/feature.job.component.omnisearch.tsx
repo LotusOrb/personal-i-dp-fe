@@ -51,6 +51,7 @@ export const FeatureJobComponentOmnisearch: React.FC<
                 onChange={(e) =>
                   formik.setFieldValue("description", e.target.value)
                 }
+                allowClear
               />
             </Form.Item>
           </Col>
@@ -62,6 +63,7 @@ export const FeatureJobComponentOmnisearch: React.FC<
                     <World size="16" strokeLinejoin="miter" />
                   </span>
                 }
+                allowClear
                 value={formik.values.location}
                 onChange={(e) =>
                   formik.setFieldValue("location", e.target.value)

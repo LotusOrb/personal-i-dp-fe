@@ -1,10 +1,29 @@
+import { useCoreStoreDispatch } from "@core/hooks/useCoreStoreDispatch";
+import { useCoreStoreSelector } from "@core/hooks/useCoreStoreSelector";
+import { featureJobAsyncAction } from "@feature/job/slice/feature.job.asyncAction";
 import { Left } from "@icon-park/react";
-import { Button, Card, Col, Row, Typography } from "antd";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Button, Card, Col, Row, Skeleton, Typography } from "antd";
+import _ from "lodash";
+import React, { useEffect, useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const FeatureJobHOCJobDetail = () => {
+  const param = useParams();
   const navigate = useNavigate();
+
+  const dispatch = useCoreStoreDispatch();
+  const store = useCoreStoreSelector((state) => state.job);
+  const listone = useMemo(
+    () => _.compact(store.ids.map(() => store.entities[param.id || ""]))[0],
+    [store.entities, store.ids]
+  );
+
+  useEffect(() => {
+    if (!listone) {
+      dispatch(featureJobAsyncAction.getDetail(param.id));
+    }
+  }, []);
+
   return (
     <div
       style={{
@@ -19,12 +38,11 @@ export const FeatureJobHOCJobDetail = () => {
             style={{
               position: "relative",
               height: "16rem",
-              backgroundImage:
-                "url('https://placehold.co/1235x338/EEE/31343C')",
+              backgroundImage: `url("${listone?.company_logo}")`,
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
-              width:'100%'
+              width: "100%",
             }}
           >
             <div
@@ -50,8 +68,9 @@ export const FeatureJobHOCJobDetail = () => {
                 position: "absolute",
                 bottom: 0,
                 width: "100%",
-                height: "128px",
-                zIndex: 1,
+                height: "8rem",
+                overflow: "hidden",
+                zIndex: 4,
                 background:
                   "linear-gradient(0deg, rgba(1,16,23,1) 0%, rgba(0,212,255,0) 100%)",
                 padding: "1rem",
@@ -59,32 +78,33 @@ export const FeatureJobHOCJobDetail = () => {
                 backgroundPosition: "center",
               }}
             >
-              <Typography.Title
-                level={2}
-                style={{ marginBlockEnd: 0, color: "#fff" }}
-              >
-                Data Engineer
-              </Typography.Title>
-              <Typography.Text style={{ marginBlockEnd: 0, color: "#fff" }}>
-                Full Time / Jakarta
-              </Typography.Text>
+              <Skeleton active={false} loading={store.status.DETAIL === 'LOADING'}>
+                <Typography.Title
+                  level={2}
+                  style={{ marginBlockEnd: 0, color: "#fff" }}
+                >
+                  {listone?.title}
+                </Typography.Title>
+                <Typography.Text style={{ marginBlockEnd: 0, color: "#fff" }}>
+                  {listone?.type} / {listone?.location}
+                </Typography.Text>
+              </Skeleton>
             </div>
           </div>
         </Col>
         <Col xs={24} md={16}>
-          <Card title="About Company">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Perferendis, officia. Soluta, odit vero? Facere quibusdam animi
-            provident fugit, veritatis deleniti optio mollitia quo voluptatem
-            unde? Quis amet molestias itaque debitis.
+          <Card title="About Company" loading={store.status.DETAIL === 'LOADING'}>
+            <div
+              dangerouslySetInnerHTML={{ __html: listone?.description || "" }}
+            />
           </Card>
         </Col>
         <Col xs={24} md={8}>
-          <Card title="How To Apply">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Perferendis, officia. Soluta, odit vero? Facere quibusdam animi
-            provident fugit, veritatis deleniti optio mollitia quo voluptatem
-            unde? Quis amet molestias itaque debitis.
+          <Card title="How To Apply" loading={store.status.DETAIL === 'LOADING'}>
+            <img src={listone?.company_logo} style={{width:'100%',height:'auto'}} alt="broken image" />
+            <div
+              dangerouslySetInnerHTML={{ __html: listone?.how_to_apply || "" }}
+            />
           </Card>
         </Col>
       </Row>
