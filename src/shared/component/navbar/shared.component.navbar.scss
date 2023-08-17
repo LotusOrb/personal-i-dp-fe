@@ -1,0 +1,57 @@
+@import "../../SCSS/variable";
+.SharedComponentNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(213, 224, 245, 0.993);
+  background-color: #fff;
+  z-index: 1024;
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    height: 4rem;
+    width: 100%;
+    flex-grow: 1;
+  }
+  &__title-wrap {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .i-icon {
+      margin-right: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    .VENDOR-typography {
+      font-size: 1.5rem;
+    }
+  }
+  &__menu-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    @each $k, $v in $layout-breakpoint {
+      @media screen and (min-width: $v) {
+        @if $k == "mobile" {
+          display: none;
+        } @else {
+          display: flex;
+        }
+      }
+    }
+  }
+  &__menu-item {
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    &:hover {
+      color: map-get($color, "primary");
+    }
+  }
+}
