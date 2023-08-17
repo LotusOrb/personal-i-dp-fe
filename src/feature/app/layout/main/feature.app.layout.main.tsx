@@ -11,11 +11,14 @@ export const FeatureAppLayoutMain = () => {
   return (
     <React.Fragment>
       <SharedComponentNavbar
-        onMenuClick={(e) => alert(e)}
-        menus={[]}
+        menus={[
+          { label: "Home", key: "/", type: "link" },
+          { label: "Job Listing", key: "/app/job-listing", type: "link" },
+          { label: "Login", key: "/auth/login", type: "button" },
+        ]}
         onLogoClick={() => navigate("/")}
       />
-      <SharedComponentResponsiveContainer className="FeatureAppLayoutMain" minHeight={'98vh'}>
+      <SharedComponentResponsiveContainer className="FeatureAppLayoutMain">
         <Outlet />
       </SharedComponentResponsiveContainer>
       <SharedComponentFooter />

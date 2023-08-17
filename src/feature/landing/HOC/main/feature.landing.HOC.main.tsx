@@ -13,6 +13,7 @@ export const FeatureLandingHOCMain = () => {
     <React.Fragment>
       <SharedComponentNavbar
         menus={[
+          { label: "Home", key: "/", type: "link" },
           { label: "Job Listing", key: "/app/job-listing", type: "link" },
           { label: "Login", key: "/auth/login", type: "button" },
         ]}
