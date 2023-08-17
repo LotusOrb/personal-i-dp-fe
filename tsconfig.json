@@ -23,7 +23,9 @@
 
     "paths": {
       "@core/*": ["core/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"],
+      "@feature/*": ["feature/*"],
     }
   },
   "include": ["src"],

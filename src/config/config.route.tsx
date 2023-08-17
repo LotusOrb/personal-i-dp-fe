@@ -1,18 +1,32 @@
-import { Button } from "antd";
-import { Navigate, RouteObject } from "react-router";
+import { FeatureAppLayoutMain } from "@feature/app/layout/main";
+import { featureLandingconfigRoutes } from "@feature/landing/config/feature.landing.config.routes";
+import { Navigate, Outlet, RouteObject } from "react-router";
 
 export const configRoute: RouteObject[] = [
-  {
-    path: "/",
-    element: (
-      <div>
-        <Button>click me</Button>
-      </div>
-    ),
-  },
+  ...featureLandingconfigRoutes,
   {
     path: "/404",
     element: <div>Page not found</div>,
+  },
+  {
+    path: "/app",
+    element: <FeatureAppLayoutMain />,
+    children: [
+      {
+        path: "*",
+        element: "a",
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <Outlet />,
+    children: [
+      {
+        path: "*",
+        element: "a",
+      },
+    ],
   },
   {
     path: "*",

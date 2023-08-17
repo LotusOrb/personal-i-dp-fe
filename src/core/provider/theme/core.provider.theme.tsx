@@ -11,7 +11,7 @@ export const CoreProviderTheme: React.FC<CoreProviderThemeProps> = ({
   children,
 }) => {
   return (
-    <ConfigProvider theme={configTheme} prefixCls="IDPFE">
+    <ConfigProvider theme={configTheme} prefixCls="VENDOR">
       <App>{children}</App>
     </ConfigProvider>
   );
