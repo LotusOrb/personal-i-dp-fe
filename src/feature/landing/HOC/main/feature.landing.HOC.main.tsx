@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import { SharedComponentNavbar } from "@shared/component/navbar";
@@ -6,9 +6,19 @@ import { FeatureLandingComponentHero } from "@feature/landing/component/hero";
 import { FeatureLandingComponentStat } from "@feature/landing/component/stat";
 import { SharedComponentFooter } from "@shared/component/footer";
 import { SharedComponentResponsiveContainer } from "@shared/component/responsivecontainer";
+import { useCoreStoreSelector } from "@core/hooks/useCoreStoreSelector";
+import { useCoreStoreDispatch } from "@core/hooks/useCoreStoreDispatch";
+import { featureJobAsyncAction } from "@feature/job/slice/feature.job.asyncAction";
 
 export const FeatureLandingHOCMain = () => {
+  const store = useCoreStoreSelector(state=>state.job);
+  const dispatch = useCoreStoreDispatch();
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    dispatch(featureJobAsyncAction.getList({page:1}))
+  },[])
+
   return (
     <React.Fragment>
       <SharedComponentNavbar
@@ -35,7 +45,7 @@ export const FeatureLandingHOCMain = () => {
           }
         />
         <FeatureLandingComponentStat
-          jobListing={1}
+          jobListing={store.ids.length}
           userRegisterd={1}
           newJob={1}
         />

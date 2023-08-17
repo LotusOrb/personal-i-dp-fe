@@ -81,15 +81,22 @@ export const FeatureJobComponentJoblist: React.FC<
                   {r.company} - {r.job_placement}
                 </div>
               </div>
-              <div style={{ textAlign: "right",paddingRight:'0.5rem' }}>
+              <div style={{ textAlign: "right", paddingRight: "0.5rem" }}>
                 <div style={{ fontWeight: 600 }}>{r.location}</div>
                 <div style={{ color: "#8ba0bf", fontSize: 14 }}>{r.date}</div>
               </div>
             </div>
           )}
         />
-        <div style={{ width: "100%", display: "block", textAlign: "center",paddingBottom:'2rem' }}>
-          {!isLoading && (
+        <div
+          style={{
+            width: "100%",
+            display: "block",
+            textAlign: "center",
+            paddingBottom: "2rem",
+          }}
+        >
+          {!isLoading && data && data?.length > 5 && (
             <Button type="primary" ref={ref}>
               Load More
             </Button>

@@ -54,7 +54,7 @@ export class CoreServiceBase {
     return header;
   }
 
-  private _metaMapper(meta?: BaseServicemeta) {
+  private _metaMapper(meta?: CoreServiceBaseMeta) {
     const qParam = new URLSearchParams();
 
     if (meta?.page) {
@@ -77,11 +77,11 @@ export class CoreServiceBase {
   private _responseMapper<T>(arg: {
     data: T;
     message: string;
-    meta: BaseServicemeta;
+    meta: CoreServiceBaseMeta;
   }): {
     data: T;
     message: string;
-    meta: BaseServicemeta;
+    meta: CoreServiceBaseMeta;
   } {
     return {
       data: arg.data,
@@ -93,7 +93,7 @@ export class CoreServiceBase {
   protected async HTTP<T>(arg: {
     method: "get" | "post" | "delete" | "put" | "patch";
     uri: string;
-    meta: BaseServicemeta;
+    meta: CoreServiceBaseMeta;
     body?: unknown;
     useAuth?: boolean;
     extraHeader?: Record<string, string>;
@@ -101,7 +101,11 @@ export class CoreServiceBase {
     const header = this._makeHeader(arg.useAuth, arg.extraHeader);
     const forgeMeta = this._metaMapper(arg.meta);
     const forgeURI = forgeMeta ? `${arg.uri}?${forgeMeta}` : arg.uri;
-    let response: AxiosResponse<T>;
+    let response: AxiosResponse<{
+      data: T;
+      messsage: string;
+      query: Record<string, string>;
+    }>;
 
     try {
       if (arg.method == "delete" || arg.method == "get") {
@@ -114,7 +118,7 @@ export class CoreServiceBase {
         });
       }
       return this._responseMapper<T>({
-        data: response.data|| ([] as T),
+        data: response.data.data || ([] as T),
         message: "Succsefully fetch",
         meta: { ...arg.meta },
       });
@@ -137,7 +141,7 @@ export class CoreServiceBase {
 
 type TListMicroService = "DEFAULT";
 
-export type BaseServicemeta = {
+export type CoreServiceBaseMeta = {
   page?: number;
   perPage?: number;
   total?: number;
