@@ -2,14 +2,13 @@ name: Vercel Production Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-on: push
-# on:
-#   pull_request:
-#     types:
-#       - closed
+on:
+  pull_request:
+    types:
+      - closed
 jobs:
   Deploy-Production:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     strategy:
       matrix:

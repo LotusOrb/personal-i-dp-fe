@@ -1,4 +1,5 @@
 # Personal IDPFE
+![example workflow](https://github.com/LotusOrb/personal-i-dp-fe/actions/workflows/vercel-deployment.yaml/badge.svg)
 ## 🤯 About 
 This project is solely created to resolve interview tests from DP, which is an abbreviation for a classified company. The project utilizes the Kanban methodology for project management. Additionally, the project's development follows the hackathon method, where deliverables are focused solely on the MVP. Consequently, numerous libraries will be used to achieve the project's objectives.
 ## 📄 Scope Of Work
